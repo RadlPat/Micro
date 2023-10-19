@@ -13,6 +13,7 @@ type jsonResponse struct {
 	Data    any    `json:"data,omitempty"`
 }
 
+// readJSON reads JSON from a http.Request, decoding it into the provided data
 func (app *Config) readJSON(w http.ResponseWriter, r *http.Request, data any) error {
 	maxBytes := 1048576 // one megabyte
 
@@ -33,6 +34,7 @@ func (app *Config) readJSON(w http.ResponseWriter, r *http.Request, data any) er
 
 }
 
+// writeJSON writes an JSON to a http.ResponseWriter
 func (app *Config) writeJSON(w http.ResponseWriter, status int, data any, headers ...http.Header) error {
 	out, err := json.Marshal(data)
 	if err != nil {
@@ -53,6 +55,7 @@ func (app *Config) writeJSON(w http.ResponseWriter, status int, data any, header
 	return nil
 }
 
+// errorJSON helper sends a JSON response containing the provided error message
 func (app *Config) errorJSON(w http.ResponseWriter, err error, status ...int) error {
 	statusCode := http.StatusBadRequest
 

@@ -8,6 +8,8 @@ import (
 	"net/http"
 )
 
+// Authenticate handles POST requests to /authenticate endpoint and returns a
+// JWT token if the user is authenticated
 func (app *Config) Authenticate(w http.ResponseWriter, r *http.Request) {
 	var requestPayload struct {
 		Email    string `json:"email"`
@@ -53,6 +55,7 @@ func (app *Config) Authenticate(w http.ResponseWriter, r *http.Request) {
 	app.writeJSON(w, http.StatusAccepted, payload)
 }
 
+// logRequest sends a POST request to a remote logger service with the provided 'name' and 'data' parameters
 func (app *Config) logRequest(name, data string) error {
 	var entry struct {
 		Name string `json:"name"`

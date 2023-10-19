@@ -48,6 +48,7 @@ func main() {
 	}
 }
 
+// openDB opens a db connections
 func openDB(dsn string) (*sql.DB, error) {
 	db, err := sql.Open("pgx", dsn)
 	if err != nil {
@@ -61,6 +62,7 @@ func openDB(dsn string) (*sql.DB, error) {
 	return db, nil
 }
 
+// connectToDB creates connection to an db
 func connectToDB() *sql.DB {
 	dsn := os.Getenv("DSN")
 
